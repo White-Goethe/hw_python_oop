@@ -14,7 +14,6 @@ class Record:
         """formatted data output"""
         return self.amount, self.comment, self.date
 
-
 class Calculator:
     def __init__(self, limit):
         self.limit = limit
@@ -44,16 +43,13 @@ class Calculator:
         day_counter = self.limit - self.get_today_stats()
         return day_counter
 
-
 class CaloriesCalculator(Calculator):
     def get_calories_remained(self):
         """counting calories"""
         today_count = self.today_count()
         if today_count > 0:
-            return ('Сегодня можно съесть что-нибудь ещё, но с общей '
-                    f'калорийностью не более {today_count} кКал')
+            return f'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более {today_count} кКал'
         return f'Хватит есть!'
-
 
 class CashCalculator(Calculator):
     EURO_RATE = 91.85
