@@ -10,10 +10,6 @@ class Record:
         else:
             self.date = dt.datetime.strptime(date, '%d.%m.%Y').date()
 
-    def show(self):
-        """formatted data output"""
-        return self.amount, self.comment, self.date
-
 
 class Calculator:
     def __init__(self, limit):
@@ -56,16 +52,17 @@ class CaloriesCalculator(Calculator):
 class CashCalculator(Calculator):
     EURO_RATE = 91.85
     USD_RATE = 75.69
+    RUB_RATE = 1
 
     def get_today_cash_remained(self, currency):
         """counting money in different currencies"""
         course = {
-            'rub': (1, 'руб'),
+            'rub': (CashCalculator.RUB_RATE, 'руб'),
             'usd': (CashCalculator.USD_RATE, 'USD'),
             'eur': (CashCalculator.EURO_RATE, 'Euro')
         }
         if currency not in course:
-            return 'Неподдерживаемая валюта'
+            raise ValueError('Неподдерживаемая валюта')
         today_count = self.today_count()
         if today_count == 0:
             return 'Денег нет, держись'
