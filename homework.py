@@ -44,6 +44,7 @@ class Calculator:
 
 
 class CaloriesCalculator(Calculator):
+    """counting calories in different currencies"""
     def get_calories_remained(self):
         today_count = self.today_count()
         if today_count > 0:
