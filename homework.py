@@ -40,8 +40,8 @@ class Calculator:
 
 
 class CaloriesCalculator(Calculator):
-    """counting calories in different currencies"""
     def get_calories_remained(self):
+        """counting calories in different currencies"""
         today_count = self.today_count()
         if today_count > 0:
             return ('Сегодня можно съесть что-нибудь ещё, но с общей '
@@ -52,22 +52,22 @@ class CaloriesCalculator(Calculator):
 class CashCalculator(Calculator):
     EURO_RATE = 91.85
     USD_RATE = 75.69
-    RUB_RATE = 1
+    RUB_RATE = 1.0
 
     def get_today_cash_remained(self, currency):
         """counting money in different currencies"""
+        today_count = self.today_count()
+        if today_count == 0:
+            return 'Денег нет, держись'
         course = {
             'rub': (CashCalculator.RUB_RATE, 'руб'),
             'usd': (CashCalculator.USD_RATE, 'USD'),
             'eur': (CashCalculator.EURO_RATE, 'Euro')
         }
-        if currency not in course:
-            raise ValueError('Неподдерживаемая валюта')
-        today_count = self.today_count()
-        if today_count == 0:
-            return 'Денег нет, держись'
         rate, valuta = course[currency]
         balance = round(today_count / rate, 2)
+        if currency not in course:
+            raise ValueError('Неподдерживаемая валюта')
         if balance > 0:
             return f'На сегодня осталось {balance} {valuta}'
         balance = abs(balance)
