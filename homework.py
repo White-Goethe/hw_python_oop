@@ -17,31 +17,31 @@ class Calculator:
         self.records = []
 
     def add_record(self, record):
-        """add new record"""
+        """Add new record."""
         self.records.append(record)
 
     def get_today_stats(self):
-        """count records for today"""
+        """Count records for today."""
         today = dt.date.today()
         return sum(record.amount for record in self.records
                    if record.date == today)
 
     def get_week_stats(self):
-        """count records for one week"""
+        """Count records for one week."""
         today = dt.date.today()
         week = dt.timedelta(days=6)
         return sum(record.amount for record in self.records
                    if today - week <= record.date <= today)
 
     def today_count(self):
-        """limit calculation"""
+        """Limit calculation."""
         day_counter = self.limit - self.get_today_stats()
         return day_counter
 
 
 class CaloriesCalculator(Calculator):
     def get_calories_remained(self):
-        """counting calories in different currencies"""
+        """Counting calories in different currencies."""
         today_count = self.today_count()
         if today_count > 0:
             return ('Сегодня можно съесть что-нибудь ещё, но с общей '
@@ -55,7 +55,7 @@ class CashCalculator(Calculator):
     RUB_RATE = 1.0
 
     def get_today_cash_remained(self, currency):
-        """counting money in different currencies"""
+        """Counting money in different currencies."""
         today_count = self.today_count()
         if today_count == 0:
             return 'Денег нет, держись'
