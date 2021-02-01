@@ -35,8 +35,7 @@ class Calculator:
 
     def today_count(self):
         """Limit calculation."""
-        day_counter = self.limit - self.get_today_stats()
-        return day_counter
+        return self.limit - self.get_today_stats()
 
 
 class CaloriesCalculator(Calculator):
